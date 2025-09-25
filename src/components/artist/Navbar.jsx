@@ -30,32 +30,21 @@ const Navbar = ({ scrollToSection, activeSection, isMobileMenuFixed }) => {
 
   const getLinkColor = (itemId) => {
     if (isScrolled || isMenuOpen || isMobileMenuFixed) {
-      return activeSection === itemId ? 'text-yellow-600' : 'text-gray-700 hover:text-yellow-600';
+      return activeSection === itemId ? 'text-yellow-600' : 'text-gray-800 hover:text-yellow-600';
     }
-    return activeSection === itemId ? 'text-yellow-400' : 'text-white hover:text-yellow-300';
-  };
-
-  const getLogoColor = () => {
-    if (isScrolled || isMenuOpen || isMobileMenuFixed) {
-      return 'text-gray-800';
-    }
-    return 'text-white';
+    return activeSection === itemId ? 'text-yellow-600' : 'text-gray-800 hover:text-yellow-600';
   };
 
   const getSocialIconColor = () => {
     if (isScrolled || isMenuOpen || isMobileMenuFixed) {
-      return 'text-gray-600 hover:text-yellow-600';
+      return 'text-gray-800 hover:text-yellow-600';
     }
-    return 'text-gray-200 hover:text-yellow-300';
+    return 'text-gray-800 hover:text-yellow-600';
   };
 
   const getMobileMenuButtonColor = () => {
-    if (isScrolled || isMenuOpen || isMobileMenuFixed) {
-      return 'text-gray-700';
-    }
-    return 'text-white';
-  }
-
+    return 'text-gray-800';
+  };
 
   const navLinkClasses = (itemId) =>
     `relative font-medium transition-colors uppercase tracking-wider text-xs px-3 py-2 rounded-sm ${getLinkColor(itemId)}`;
@@ -64,7 +53,7 @@ const Navbar = ({ scrollToSection, activeSection, isMobileMenuFixed }) => {
     activeSection === itemId && (
       <motion.div
         layoutId="activeIndicatorNavbarArtist"
-        className={`absolute bottom-0 left-0 right-0 h-[1.5px] ${(isScrolled || isMenuOpen || isMobileMenuFixed) ? 'bg-yellow-600' : 'bg-yellow-400'}`}
+        className={`absolute bottom-0 left-0 right-0 h-[1.5px] bg-yellow-600`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -78,12 +67,10 @@ const Navbar = ({ scrollToSection, activeSection, isMobileMenuFixed }) => {
     }, 150);
   };
 
-  const navClasses = `fixed top-0 w-full z-50 transition-all duration-300 ease-in-out 
-    ${isScrolled || isMenuOpen ? 'bg-white/95 backdrop-blur-md shadow-md' : 'bg-transparent backdrop-blur-sm'}`;
+  // Navbar fijo con fondo blur translúcido
+  const navClasses = `fixed top-0 w-full z-50 bg-white/20 backdrop-blur-md`;
 
-  const mobileNavClasses = `fixed top-0 w-full z-50 transition-all duration-300 ease-in-out 
-    ${isMobileMenuFixed || isMenuOpen ? 'bg-white/95 backdrop-blur-md shadow-md' : 'bg-transparent backdrop-blur-sm'}`;
-
+  const mobileNavClasses = `fixed top-0 w-full z-50 bg-white/4 backdrop-blur-md`;
 
   return (
     <>
@@ -100,7 +87,7 @@ const Navbar = ({ scrollToSection, activeSection, isMobileMenuFixed }) => {
             >
               <span className="font-cormorant text-3xl font-bold tracking-tight">
                 <span className="text-amber-600">L</span>
-                <span className="text-white">uciano Esteban 🎨</span>
+                <span className="text-gray-800">uciano Esteban 🎨</span>
               </span>
             </motion.div>
 
@@ -117,6 +104,7 @@ const Navbar = ({ scrollToSection, activeSection, isMobileMenuFixed }) => {
                 </button>
               ))}
             </div>
+
             <div className="flex items-center space-x-4">
               {socialLinks.map(social => (
                 <a
@@ -149,9 +137,10 @@ const Navbar = ({ scrollToSection, activeSection, isMobileMenuFixed }) => {
                 else scrollToSection('inicio');
               }}
             >
-              <span className={`font-cormorant text-2xl font-bold tracking-tight transition-colors ${getLogoColor()}`}>
-                L. Esteban
-              </span>
+             <span className="font-cormorant text-2xl font-bold tracking-tight">
+  <span className="text-amber-600">L</span>
+  <span className="text-gray-900">uciano Esteban 🎨</span>
+</span>
             </motion.div>
 
             <div className="flex items-center">
@@ -161,15 +150,14 @@ const Navbar = ({ scrollToSection, activeSection, isMobileMenuFixed }) => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`transition-colors mr-3 
-                      ${(isMobileMenuFixed || isMenuOpen || isScrolled) ? getSocialIconColor() : 'opacity-0'}`}
+                  className={`transition-colors mr-3 ${getSocialIconColor()}`}
                   aria-label={social.aria}
                 >
                   <social.icon size={18} />
                 </a>
               ))}
               <button
-                className={`p-2 z-10 transition-colors ${getMobileMenuButtonColor()}`}
+                className={`p-2 z-10 ${getMobileMenuButtonColor()}`}
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
                 aria-expanded={isMenuOpen}
@@ -179,13 +167,14 @@ const Navbar = ({ scrollToSection, activeSection, isMobileMenuFixed }) => {
             </div>
           </div>
         </div>
+
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="bg-white border-t border-gray-200 shadow-lg overflow-hidden"
+              className="bg-white/20 border-t border-gray-200 shadow-lg backdrop-blur-md overflow-hidden"
             >
               <div className="px-4 py-5 space-y-2">
                 {navItems.map((item) => (
@@ -195,7 +184,7 @@ const Navbar = ({ scrollToSection, activeSection, isMobileMenuFixed }) => {
                     className={`block w-full text-left px-3 py-3 rounded-md transition-colors uppercase tracking-wider text-sm font-medium
                       ${activeSection === item.id
                         ? 'bg-yellow-50 text-yellow-700'
-                        : 'text-gray-700 hover:text-yellow-600 hover:bg-yellow-50/50'
+                        : 'text-gray-800 hover:text-yellow-600 hover:bg-yellow-50/50'
                       }`}
                     aria-current={activeSection === item.id ? "page" : undefined}
                   >

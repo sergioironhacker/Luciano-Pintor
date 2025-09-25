@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 @tailwind base;
@@ -31,7 +30,7 @@
   }
 
   .dark {
-    /* For future dark mode, if requested */
+    /* For future dark mode */
     --background: 0 0% 10%;
     --foreground: 0 0% 95%;
     --primary: 45 70% 65%;
@@ -50,30 +49,47 @@
     --input: 0 0% 35%;
     --ring: 45 70% 65%;
   }
-}
 
-@layer base {
-  * {
-    @apply border-border;
+  /* Evitar scroll horizontal */
+  html, body {
+    @apply overflow-x-hidden;
   }
+
+  /* Box sizing global */
+  * {
+    @apply box-border max-w-full;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground antialiased text-sm sm:text-base md:text-lg;
     font-family: 'Lato', sans-serif;
   }
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-playfair;
   }
 }
 
 @layer components {
+  /* Containers */
   .container-artist {
-    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply max-w-full sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
+
+  /* Section padding */
   .section-padding-artist {
-    @apply py-16 sm:py-20 md:py-24;
+    @apply py-12 sm:py-16 md:py-20 lg:py-24;
   }
+
+  /* Text and background colors */
   .text-gold-elegant {
-    @apply text-yellow-600; /* More elegant gold, less saturated */
+    @apply text-yellow-600;
   }
   .bg-gold-elegant {
     @apply bg-yellow-600;
@@ -85,31 +101,41 @@
     @apply ring-yellow-600;
   }
 
+  /* Buttons responsive */
   .btn-primary-artist {
-    @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-300;
+    @apply w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-300;
   }
+
   .btn-secondary-artist {
-    @apply inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition-colors duration-300;
+    @apply w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition-colors duration-300;
   }
+
   .btn-outline-artist {
-     @apply inline-flex items-center justify-center px-5 py-2.5 border border-gray-800 text-sm font-medium rounded-md text-gray-800 bg-transparent hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 transition-all duration-300 ease-in-out;
+    @apply w-full sm:w-auto inline-flex items-center justify-center px-5 py-2.5 border border-gray-800 text-sm font-medium rounded-md text-gray-800 bg-transparent hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 transition-all duration-300 ease-in-out;
   }
-   .floating-whatsapp-artist {
+
+  /* Floating WhatsApp */
+  .floating-whatsapp-artist {
     position: fixed;
-    bottom: 25px;
-    right: 25px;
+    bottom: 20px;
+    right: 20px;
     z-index: 1000;
+    @apply w-12 h-12 sm:w-14 sm:h-14;
     animation: floatArtist 3s ease-in-out infinite;
   }
-  
+
   @keyframes floatArtist {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-7px); }
   }
-}
 
-html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Responsive grid */
+  .grid-responsive-artist {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 overflow-hidden;
+  }
+
+  /* Images responsive */
+  .img-responsive-artist {
+    @apply w-full h-auto rounded-md;
+  }
 }
