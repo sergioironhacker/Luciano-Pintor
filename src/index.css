@@ -1,0 +1,115 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%; /* white */
+    --foreground: 0 0% 15%; /* dark gray for text */
+    --primary: 45 86% 59%; /* gold-like, elegant accent */
+    --primary-foreground: 0 0% 100%; /* white for text on primary */
+    --secondary: 0 0% 96%; /* light gray for backgrounds */
+    --secondary-foreground: 0 0% 20%; /* dark gray for text on secondary */
+    
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 15%;
+    --muted: 0 0% 90%; /* light gray for muted elements */
+    --muted-foreground: 0 0% 40%; /* medium gray for muted text */
+    --accent: 45 70% 70%; /* softer gold for accents */
+    --accent-foreground: 0 0% 15%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 85%; /* light gray for borders */
+    --input: 0 0% 80%; /* slightly darker gray for input borders */
+    --ring: 45 86% 59%; /* gold for focus rings */
+    --radius: 0.375rem; /* 6px */
+  }
+
+  .dark {
+    /* For future dark mode, if requested */
+    --background: 0 0% 10%;
+    --foreground: 0 0% 95%;
+    --primary: 45 70% 65%;
+    --primary-foreground: 0 0% 10%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 90%;
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 95%;
+    --muted: 0 0% 25%;
+    --muted-foreground: 0 0% 70%;
+    --accent: 45 60% 75%;
+    --accent-foreground: 0 0% 10%;
+    --border: 0 0% 30%;
+    --input: 0 0% 35%;
+    --ring: 45 70% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Lato', sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-playfair;
+  }
+}
+
+@layer components {
+  .container-artist {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  .section-padding-artist {
+    @apply py-16 sm:py-20 md:py-24;
+  }
+  .text-gold-elegant {
+    @apply text-yellow-600; /* More elegant gold, less saturated */
+  }
+  .bg-gold-elegant {
+    @apply bg-yellow-600;
+  }
+  .border-gold-elegant {
+    @apply border-yellow-600;
+  }
+  .ring-gold-elegant {
+    @apply ring-yellow-600;
+  }
+
+  .btn-primary-artist {
+    @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-300;
+  }
+  .btn-secondary-artist {
+    @apply inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition-colors duration-300;
+  }
+  .btn-outline-artist {
+     @apply inline-flex items-center justify-center px-5 py-2.5 border border-gray-800 text-sm font-medium rounded-md text-gray-800 bg-transparent hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 transition-all duration-300 ease-in-out;
+  }
+   .floating-whatsapp-artist {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 1000;
+    animation: floatArtist 3s ease-in-out infinite;
+  }
+  
+  @keyframes floatArtist {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-7px); }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
